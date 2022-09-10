@@ -4,14 +4,7 @@
     "es2021": true
   },
   "ignorePatterns": ["node_modules", "dist", "build"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:react/jsx-runtime"
-  ],
+  "extends": ["airbnb"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
@@ -26,33 +19,34 @@
   "plugins": ["react", "prettier", "import", "babel"],
   "parser": "@babel/eslint-parser",
   "rules": {
-    "indent": ["error", 2],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "prettier/prettier": "error",
     "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
-    "semi": ["error", "always"],
+    "semi": ["error", "never"],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
+    "no-plusplus": "off",
+    "no-param-reassign": "off",
+    "object-curly-newline": "off",
+    "max-len": 0,
+    "comma-dangle": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "jsx-a11y/no-autofocus": "off",
     "import/no-unresolved": [2, { "caseSensitive": false }],
+    "react/state-in-constructor": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/order": [
       2,
       {
         "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
         "newlines-between": "always"
-      }
-    ],
-    "no-console": 1,
-    "import/named": 0,
-    "import/no-named-as-default": 0,
-    "import/no-named-as-default-member": 0,
-    "import/namespace": 0,
-    "import/default": 0,
-    "import/export": 0,
-    "no-unused-vars": [
-      "error",
-      {
-        "varsIgnorePattern": "^[A-Z]"
       }
     ]
   },
