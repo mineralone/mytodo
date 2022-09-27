@@ -5,11 +5,11 @@ import './footer.css'
 import TasksFilter from '../tasks-filter'
 
 function Footer(props) {
-  const { doneCount, onChangeRenderStatus, onClearCompleted } = props
+  const { doneCount, onChangeRenderStatus, onClearCompleted, renderStatus } = props
   return (
     <footer className="footer">
       <span className="todo-count">{`${doneCount} items left`}</span>
-      <TasksFilter onChangeRenderStatus={onChangeRenderStatus} />
+      <TasksFilter onChangeRenderStatus={onChangeRenderStatus} renderStatus={renderStatus} />
       <button type="button" className="clear-completed" onClick={onClearCompleted}>
         Clear completed
       </button>

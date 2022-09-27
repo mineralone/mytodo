@@ -3,6 +3,25 @@ import PropTypes from 'prop-types'
 import './tasks-filter.css'
 
 export default class TasksFilter extends Component {
+  buttonAll = React.createRef()
+
+  buttonCompleted = React.createRef()
+
+  buttonActive = React.createRef()
+
+  componentDidMount() {
+    const { renderStatus } = this.props
+    if (this.buttonActive.current.innerText.toString().toLowerCase() === renderStatus) {
+      this.buttonActive.current.classList.add('selected')
+    }
+    if (this.buttonCompleted.current.innerText.toString().toLowerCase() === renderStatus) {
+      this.buttonCompleted.current.classList.add('selected')
+    }
+    if (this.buttonAll.current.innerText.toString().toLowerCase() === renderStatus) {
+      this.buttonAll.current.classList.add('selected')
+    }
+  }
+
   filter = (e, status) => {
     const { onChangeRenderStatus } = this.props
     const allBtn = document.querySelectorAll('.selected')
@@ -15,17 +34,17 @@ export default class TasksFilter extends Component {
     return (
       <ul className="filters">
         <li>
-          <button type="button" className="selected" onClick={(e) => this.filter(e, 'all')}>
+          <button type="button" ref={this.buttonAll} onClick={(e) => this.filter(e, 'all')}>
             All
           </button>
         </li>
         <li>
-          <button type="button" onClick={(e) => this.filter(e, 'active')}>
+          <button type="button" ref={this.buttonActive} onClick={(e) => this.filter(e, 'active')}>
             Active
           </button>
         </li>
         <li>
-          <button type="button" onClick={(e) => this.filter(e, 'complete')}>
+          <button type="button" ref={this.buttonCompleted} onClick={(e) => this.filter(e, 'completed')}>
             Completed
           </button>
         </li>

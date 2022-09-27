@@ -26,15 +26,15 @@ export default class TaskList extends Component {
   }
 
   elements = (todoData, status) => {
-    const { onDeleted, onChangeStatus } = this.props
+    const { onDeleted, onChangeStatus, onToggleTimer, timerFn } = this.props
     if (status === 'active') {
       todoData = todoData.filter((item) => !item.isCompleted)
     }
-    if (status === 'complete') {
+    if (status === 'completed') {
       todoData = todoData.filter((item) => item.isCompleted)
     }
     return todoData.map((item) => {
-      const { label, id, isEditing, isCompleted } = item
+      const { label, id, isEditing, isCompleted, secTimer, timer, date } = item
       let classRender = ''
       if (isEditing) {
         classRender = 'editing'
@@ -45,11 +45,16 @@ export default class TaskList extends Component {
         <li key={id} className={classRender}>
           <Task
             label={label || undefined}
+            secTimer={secTimer}
             id={id}
             isCompleted={isCompleted}
             onDeleted={() => onDeleted(id)}
             onCompleted={() => onChangeStatus(id, 'isCompleted')}
             onEditing={() => onChangeStatus(id, 'isEditing')}
+            onToggleTimer={onToggleTimer}
+            timer={timer}
+            timerFn={() => timerFn(id)}
+            date={date}
           />
           {isEditing ? (
             <form onSubmit={(e) => this.onSubmitEdit(e, id, label)}>
