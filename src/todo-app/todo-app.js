@@ -10,6 +10,21 @@ export default function TodoApp() {
   const [renderStatus, setRenderStatus] = useState(JSON.parse(localStorage.getItem('renderStatus')) || 'all')
   const [todoData, setTodoData] = useState(JSON.parse(localStorage.getItem('todoData')) || [])
 
+  const onClickOutInput = () => {
+    setTodoData((prevTodoData) => {
+      return prevTodoData.map((item) => {
+        const newItem = { ...item }
+        newItem.isEditing = false
+        return newItem
+      })
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener('click', (e) => {
+      if (e.target.className !== 'edit' && e.target.className !== 'icon icon-edit') onClickOutInput()
+    })
+  }, [])
   useEffect(() => localStorage.setItem('countIds', JSON.stringify(countIds)), [countIds])
   useEffect(() => localStorage.setItem('renderStatus', JSON.stringify(renderStatus)), [renderStatus])
   useEffect(() => localStorage.setItem('todoData', JSON.stringify(todoData)), [todoData])

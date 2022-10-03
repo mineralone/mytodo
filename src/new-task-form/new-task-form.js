@@ -23,6 +23,7 @@ export default function NewTaskForm({ addTodo }) {
         autoFocus
         onChange={(e) => setText(e.target.value)}
         value={text}
+        required
       />
       <input
         className="new-todo-form__timer"

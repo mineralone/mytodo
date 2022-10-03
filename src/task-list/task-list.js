@@ -21,6 +21,10 @@ export default function TaskList({
     setText('')
   }
 
+  const onKeyDown = (e, id) => {
+    if (e.key === 'Escape') onChangeStatus(id, 'isEditing')
+  }
+
   const elements = () => {
     if (renderStatus === 'active') {
       todoData = todoData.filter((item) => !item.isCompleted)
@@ -52,7 +56,7 @@ export default function TaskList({
             date={date}
           />
           {isEditing ? (
-            <form onSubmit={(e) => onSubmitEdit(e, id, label)}>
+            <form onSubmit={(e) => onSubmitEdit(e, id, label)} onKeyDown={(e) => onKeyDown(e, id)}>
               <input
                 type="text"
                 className="edit"
