@@ -25,6 +25,13 @@ export default class TaskList extends Component {
     })
   }
 
+  onKeyDown = (e, id) => {
+    if (e.key === 'Escape') {
+      const { onChangeStatus } = this.props
+      onChangeStatus(id, 'isEditing')
+    }
+  }
+
   elements = (todoData, status) => {
     const { onDeleted, onChangeStatus, onToggleTimer, timerFn } = this.props
     if (status === 'active') {
@@ -57,7 +64,7 @@ export default class TaskList extends Component {
             date={date}
           />
           {isEditing ? (
-            <form onSubmit={(e) => this.onSubmitEdit(e, id, label)}>
+            <form onSubmit={(e) => this.onSubmitEdit(e, id, label)} onKeyDown={(e) => this.onKeyDown(e, id)}>
               <input type="text" className="edit" autoFocus onChange={this.onEditTask} defaultValue={label} />
             </form>
           ) : null}

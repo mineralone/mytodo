@@ -21,6 +21,7 @@
         "SwitchCase": 1
       }
     ],
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-autofocus": "off",
     "operator-linebreak": [1, "after", { "overrides": { "?": "before", ":": "before" } }],
     "linebreak-style": [0, "unix"],

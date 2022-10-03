@@ -19,6 +19,9 @@ export default class TodoApp extends Component {
       : 'all'
     const newTodoData = localStorage.getItem('todoData') ? JSON.parse(localStorage.getItem('todoData')) : []
     this.setState({ countIds: newCountIds, renderStatus: newRenderStatus, todoData: newTodoData })
+    window.addEventListener('click', (e) => {
+      if (e.target.className !== 'edit' && e.target.className !== 'icon icon-edit') this.onClickOutInput()
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -26,6 +29,16 @@ export default class TodoApp extends Component {
     if (prevState.countIds !== countIds) localStorage.setItem('countIds', JSON.stringify(countIds))
     if (prevState.renderStatus !== renderStatus) localStorage.setItem('renderStatus', JSON.stringify(renderStatus))
     if (prevState.todoData !== todoData) localStorage.setItem('todoData', JSON.stringify(todoData))
+  }
+
+  onClickOutInput = () => {
+    this.setState(({ todoData }) => ({
+      todoData: todoData.map((item) => {
+        const newItem = { ...item }
+        newItem.isEditing = false
+        return newItem
+      }),
+    }))
   }
 
   onEditTodo = (id, label) => {

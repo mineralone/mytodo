@@ -14,15 +14,11 @@ export default class Task extends Component {
     this.intervalDate = setInterval(this.renderTime, 5000)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const { timer, timerFn } = this.props
-    if (timer && !prevProps.timer) {
-      clearInterval(this.intervalTimer)
-      this.intervalTimer = setInterval(timerFn, 1000)
-    }
-    if (!timer && prevProps.timer) {
-      clearInterval(this.intervalTimer)
-    }
+    clearInterval(this.intervalTimer)
+    this.intervalTimer = setInterval(timerFn, 1000)
+    if (!timer) clearInterval(this.intervalTimer)
   }
 
   componentWillUnmount() {

@@ -50,6 +50,7 @@ export default class NewTaskForm extends Component {
           autoFocus
           onChange={this.onChangeLabel}
           value={label}
+          required
         />
         <input
           className="new-todo-form__timer"
